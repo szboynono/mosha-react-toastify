@@ -2,6 +2,8 @@
   "version": "0.0.0",
   "name": "mosha-react-toastify",
   "files": ["dist"],
+  "license": "MIT",
+  "description": "A light weight and fun react toast or notification or snack bar or however you wanna call it library.",
   "main": "./dist/mosha-react-toastify.umd.js",
   "typings": "dist/main.d.ts",
   "module": "./dist/mosha-react-toastify.es.js",
@@ -12,7 +14,7 @@
     }
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "cd example && yarn dev",
     "build": "vite build && tsc",
     "serve": "vite preview"
   },
