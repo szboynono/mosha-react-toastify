@@ -1,22 +1,28 @@
-import React, { createElement } from 'react'
-import { Position } from './types'
-import Toast from './components/Toast'
+import { createElement, FunctionComponentElement } from 'react'
+import Toast, { ToastProps } from './components/Toast'
 import { render, unmountComponentAtNode } from 'react-dom'
 import { addToastObj, removeToastObj } from './state'
 import { generateId } from './util'
 
 export const createToast = () => {
-
-  const container = document.createElement('div')
-  document.body.appendChild(container)
-
   const id = generateId()
-  const toast = createElement(Toast, { id, closeToast });
+  const container = createContainer()
+  const toast = createComponent(id)
 
   render(toast, container)
   addToastObj('top-center', {
     id, container
   })
+}
+
+const createContainer = (): HTMLElement => {
+  const container = document.createElement('div')
+  document.body.appendChild(container)
+  return container
+}
+
+const createComponent = (id: string): FunctionComponentElement<ToastProps> => {
+  return createElement(Toast, { id, closeToast });
 }
 
 const closeToast = (id: string) => {

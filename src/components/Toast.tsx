@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect } from 'react'
 
-interface ToastProps {
+export interface ToastProps {
   id: string,
   closeToast: (id: string) => void
 }
@@ -12,9 +12,8 @@ const Toast: FunctionComponent<ToastProps> = ({ id, closeToast }) => {
   }
 
   useEffect(() => {
-    console.log('init')
     return () => {
-      console.log('done')
+      cleanUp()
     }
   }, [])
 
