@@ -1,5 +1,10 @@
 export type ToastType = 'info' | 'danger' | 'warning' | 'success' | 'default'
 
+export interface ToastObject {
+  id: string,
+  container: HTMLElement,
+}
+
 export type Position =
   | 'top-left'
   | 'top-right'
