@@ -5,7 +5,7 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={() => createToast()}>try</button>
+      <button onClick={() => createToast({ title: 'yoyo', description: 'descriasfkahsflh' }, { position: 'top-left', timeout: 5000 })}>try</button>
     </div>
   )
 }

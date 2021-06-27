@@ -2,15 +2,18 @@ import React, { FunctionComponent, useEffect, useState } from 'react'
 import classes from '../styles/toast.module.css';
 import animations from '../styles/bounce.module.css';
 import { CSSTransition } from 'react-transition-group';
+import { ToastOptions } from '../types';
 
 export interface ToastProps {
   id: string,
   verticalOffset: number,
-  triggerAnimate: boolean,
+  text: string,
+  description?: string,
+  options?: ToastOptions,
   closeToast: (id: string) => void
 }
 
-const Toast: FunctionComponent<ToastProps> = ({ id, verticalOffset, triggerAnimate = false, closeToast }) => {
+const Toast: FunctionComponent<ToastProps> = ({ id, text, description, verticalOffset, options, closeToast }) => {
   const [animate, setAnimate] = useState(false)
   const [hide, setHide] = useState(true)
 
@@ -25,6 +28,11 @@ const Toast: FunctionComponent<ToastProps> = ({ id, verticalOffset, triggerAnima
 
   useEffect(() => {
     setAnimate(true)
+    if(options) {
+      setTimeout(() => {
+        onCloseButtonClick()
+      }, options.timeout)
+    }
     return () => {
       cleanUp()
     }
@@ -40,7 +48,7 @@ const Toast: FunctionComponent<ToastProps> = ({ id, verticalOffset, triggerAnima
       }}
       onEnter={() => setHide(false)}>
       <div hidden={hide} style={{ top: verticalOffset }} className={classes.Toast}>
-        {id} Toasting
+        {id} {text} {description}
         <button onClick={() => onCloseButtonClick()}>close</button>
       </div>
     </CSSTransition>

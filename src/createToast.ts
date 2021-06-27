@@ -3,8 +3,9 @@ import Toast, { ToastProps } from './components/Toast'
 import { render, unmountComponentAtNode } from 'react-dom'
 import { addToastObj, getToastsByPosition, removeToastObj, setComponentByIdAndPosition } from './state'
 import { generateId } from './util'
+import { ToastContent, ToastOptions } from './types'
 
-export const createToast = () => {
+export const createToast = (content: ToastContent, options?: ToastOptions) => {
   const id = generateId()
 
   const toasts = getToastsByPosition('top-left')
@@ -16,11 +17,31 @@ export const createToast = () => {
   })
 
   const container = createContainer()
-  const component = createElement(Toast, { id, verticalOffset, triggerAnimate: false, closeToast })
+  const toastProps: ToastProps = buildProps(id, content, verticalOffset, options)
+  const component = createElement(Toast, toastProps)
   render(component, container);
   addToastObj('top-left', {
     id, container, component
   })
+}
+
+const buildProps = (id: string, content: ToastContent, verticalOffset: number, options?: ToastOptions): ToastProps => {
+  const initializedOptions: ToastOptions = {
+    type: options ? options.type || 'default' : 'default',
+    timeout: options ? options.timeout || 5000 : 5000, 
+    showCloseButton: options ? options.showCloseButton || true : true,
+    position: options ? options.position || 'top-left' : 'top-left',
+    showIcon: options ? options.showIcon || true : true ,
+    transition: options ? options.transition || 'bounce' : 'bounce',
+    hideProgressBar: options ? options.hideProgressBar || false : false,
+    swipeClose: options ? options.swipeClose || true : true,
+    onClose: () => {}
+  }
+  if (typeof content === 'string') {
+    return { id, text: content, verticalOffset, closeToast, options: initializedOptions}
+  } else {
+    return { id, text: content.title, description: content.description, verticalOffset, closeToast, options: initializedOptions}
+  }
 }
 
 const createContainer = (): HTMLElement => {
