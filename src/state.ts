@@ -24,6 +24,6 @@ export const removeToastObj = (id: string, position: Position): ToastObject | un
 export const getToastsByPosition = (position: Position) => toasts[position]
 
 export const setComponentByIdAndPosition = (id: string, position: Position, component: FunctionComponentElement<ToastProps>) => {
-  const index = toasts['top-left'].findIndex(toastObj => toastObj.id === id)
-  toasts['top-left'][index] = {...toasts['top-left'][index], component }
+  const index = toasts[position].findIndex(toastObj => toastObj.id === id)
+  toasts[position][index] = {...toasts[position][index], component }
 }
