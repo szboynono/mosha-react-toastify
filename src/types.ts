@@ -1,8 +1,12 @@
+import { FunctionComponentElement } from 'react'
+import { ToastProps } from './components/Toast'
+
 export type ToastType = 'info' | 'danger' | 'warning' | 'success' | 'default'
 
 export interface ToastObject {
   id: string,
   container: HTMLElement,
+  component: FunctionComponentElement<ToastProps>
 }
 
 export type Position =

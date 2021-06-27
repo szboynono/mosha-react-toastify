@@ -1,0 +1,20 @@
+.toast {
+  position: fixed;
+  min-height: 64px;
+  max-height: 800px;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 12px 8px;
+  word-break: break-word;
+  min-width: 312px;
+  max-width: 480px;
+  width: max-content;
+  background-color: red;
+  z-index: 9999;
+  border-radius: 8px;
+  margin: 0 16px;
+  user-select: none;
+  & button {
+    color: green;
+  }
+}
