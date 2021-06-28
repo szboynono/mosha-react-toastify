@@ -54,13 +54,14 @@ const closeToast = (id: string) => {
   adjustToastsOnRemove(id)
   const toastObj = removeToastObj(id, 'top-left')
 
-  if (!toastObj) throw new Error('Nothing to remove!')
+  if (!toastObj) return;
   cleanUp(toastObj.container)
 }
 
 const adjustToastsOnRemove = (toastId: string) => {
   const toasts = getToastsByPosition('top-left');
   const pendindRemoveToastIndex = toasts.findIndex(toast => toast.id === toastId);
+  if (pendindRemoveToastIndex === -1) return;
   const pendingRemoveToastOffset = (toasts[pendindRemoveToastIndex].container.firstChild as HTMLElement).offsetHeight
 
   for (let i = pendindRemoveToastIndex + 1; i < toasts.length; i++) {
